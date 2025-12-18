@@ -5,147 +5,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="OccSTeP: Benchmarking 4D Occupancy Spatio-Temporal Persistence" />
   <title>OccSTeP: Benchmarking 4D Occupancy Spatio-Temporal Persistence</title>
-  <style>
-    :root{
-      --bg:#0b0f19;
-      --card:#111827;
-      --muted:#9ca3af;
-      --text:#e5e7eb;
-      --accent:#3b82f6;
-      --accent2:#10b981;
-      --border:rgba(255,255,255,.08);
-      --shadow: 0 10px 30px rgba(0,0,0,.35);
-      --radius:18px;
-      --max: 1040px;
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-      background: radial-gradient(1200px 800px at 10% 0%, rgba(59,130,246,.25), transparent 60%),
-                  radial-gradient(900px 700px at 90% 10%, rgba(16,185,129,.18), transparent 55%),
-                  var(--bg);
-      color:var(--text);
-      line-height:1.6;
-    }
-    a{color:inherit}
-    .wrap{max-width:var(--max); margin:0 auto; padding:28px 20px 60px;}
-    header{
-      border:1px solid var(--border);
-      background: linear-gradient(180deg, rgba(17,24,39,.85), rgba(17,24,39,.55));
-      box-shadow: var(--shadow);
-      border-radius: var(--radius);
-      padding: 28px;
-      position: relative;
-      overflow:hidden;
-    }
-    header:before{
-      content:"";
-      position:absolute; inset:-2px;
-      background: radial-gradient(800px 240px at 20% 10%, rgba(59,130,246,.35), transparent 55%),
-                  radial-gradient(600px 240px at 80% 30%, rgba(16,185,129,.25), transparent 55%);
-      pointer-events:none;
-      filter: blur(6px);
-      opacity:.9;
-    }
-    header > *{position:relative}
-    h1{margin:0 0 8px; font-size: 32px; letter-spacing:.2px;}
-    .subtitle{color:var(--muted); margin:0 0 18px; font-size: 15.5px;}
-    .chips{display:flex; flex-wrap:wrap; gap:10px; margin: 14px 0 0;}
-    .chip{
-      padding:6px 10px;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      background: rgba(255,255,255,.04);
-      color: #d1d5db;
-      font-size: 13px;
-    }
-    .btns{display:flex; flex-wrap:wrap; gap:10px; margin-top:18px}
-    .btn{
-      display:inline-flex; align-items:center; gap:8px;
-      padding:10px 12px;
-      border-radius: 12px;
-      border:1px solid var(--border);
-      background: rgba(255,255,255,.05);
-      text-decoration:none;
-      font-weight: 600;
-      font-size: 14px;
-    }
-    .btn.primary{background: rgba(59,130,246,.18); border-color: rgba(59,130,246,.35)}
-    .btn.good{background: rgba(16,185,129,.16); border-color: rgba(16,185,129,.35)}
-    .btn:hover{transform: translateY(-1px); transition:.15s ease;}
-
-    main{margin-top:18px; display:grid; grid-template-columns: 1.2fr .8fr; gap:18px}
-    @media (max-width: 900px){ main{grid-template-columns:1fr;} }
-
-    section{
-      border:1px solid var(--border);
-      background: rgba(17,24,39,.55);
-      box-shadow: var(--shadow);
-      border-radius: var(--radius);
-      padding: 22px;
-    }
-    h2{margin:0 0 10px; font-size: 18px}
-    p{margin: 10px 0}
-    ul{margin:10px 0 0 18px; padding:0}
-    li{margin:6px 0}
-    .muted{color:var(--muted)}
-
-    .grid2{display:grid; grid-template-columns:1fr 1fr; gap:12px}
-    @media (max-width: 560px){ .grid2{grid-template-columns:1fr;} }
-
-    .card{
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,.03);
-      border-radius: 14px;
-      padding: 14px;
-    }
-    .kpi{display:flex; flex-direction:column; gap:2px}
-    .kpi b{font-size: 18px}
-    .kpi span{font-size: 12.5px; color:var(--muted)}
-
-    .figure{
-      border: 1px dashed rgba(255,255,255,.18);
-      background: rgba(255,255,255,.02);
-      border-radius: 16px;
-      padding: 14px;
-      overflow:hidden;
-    }
-    .figure .ph{
-      height: 220px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, rgba(59,130,246,.20), rgba(16,185,129,.12));
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      color: rgba(229,231,235,.85);
-      font-weight:700;
-      letter-spacing:.3px;
-    }
-    .small{font-size: 13px}
-    footer{
-      margin-top:18px;
-      text-align:center;
-      color: var(--muted);
-      font-size: 12.5px;
-    }
-    code{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;}
-    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;}
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="wrap">
     <header>
+      <a href="https://insailab.org/" target="_blank" rel="noopener" class="lab-logo">
+        <img src="assets/insai.png" alt="InSAI Lab" />
+        <span>InSAI Lab</span>
+      </a>
       <h1>OccSTeP: Benchmarking 4D Occupancy Spatio-Temporal Persistence</h1>
-      <p class="subtitle">
-        A benchmark and world-model framework for long-horizon, robust 4D occupancy prediction under temporal disruptions (missing frames, view breaks, and semantic noise).
-      </p>
+
+      <div class="authors-list">
+        <span class="author">Yu Zheng<sup>1</sup></span>
+        <span class="author">Jie Hu<sup>1</sup></span>
+        <span class="author">Kailun Yang<sup>1</sup></span>
+        <span class="author">Jiaming Zhang<sup>1,2,*</sup></span>
+      </div>
+      <div class="affiliation">
+        <span><sup>1</sup>Hunan University</span>
+        <span><sup>2</sup>ETH Zurich</span>
+        <span style="margin-left: 8px;"><sup>*</sup>Corresponding Author</span>
+      </div>
 
       <div class="btns">
         <!-- Replace placeholders with your actual links -->
-        <a class="btn primary" href="#" target="_blank" rel="noopener">📄 Paper (PDF)</a>
-        <a class="btn" href="#" target="_blank" rel="noopener">📑 arXiv</a>
-        <a class="btn good" href="#" target="_blank" rel="noopener">💻 Code</a>
+        <a class="btn good" href="https://arxiv.org/pdf/2512.15621" target="_blank" rel="noopener">📄 Paper (PDF)</a>
+        <a class="btn good" href="https://arxiv.org/abs/2512.15621" target="_blank" rel="noopener">📑 arXiv</a>
+        <a class="btn tbd" href="https://github.com/InSAI-Lab/OccSTeP" target="_blank" rel="noopener">💻 Code</a>
         <a class="btn" href="#" target="_blank" rel="noopener">🧪 Benchmark</a>
         <a class="btn" href="#" target="_blank" rel="noopener">📦 Models</a>
       </div>
@@ -154,45 +41,42 @@
         <span class="chip">4D Occupancy</span>
         <span class="chip">World Model</span>
         <span class="chip">Tokenizer-free</span>
+        <span class="chip">Reactive / Proactive</span>
         <span class="chip">Incremental / Online</span>
-        <span class="chip">Robustness Benchmark</span>
+        <span class="chip">Persistence Benchmark</span>
       </div>
     </header>
 
     <main>
-      <section>
+      <section class="full-width">
         <h2>Overview</h2>
-        <p>
-          <b>OccSTeP</b> focuses on <b>spatio-temporal persistence</b> for 4D occupancy prediction: models should maintain stable scene understanding
-          despite temporal disruptions and noisy observations. We provide a benchmark suite and a world-model baseline designed for incremental,
-          long-horizon modeling.
-        </p>
-
         <div class="figure" style="margin-top:14px">
-          <div class="ph">Figure Placeholder (Pipeline / Teaser)</div>
+          <img src="assets/occstep.png" alt="OccSTeP Overview" />
           <p class="small muted" style="margin:10px 2px 0">
-            Replace this block with your teaser figure (e.g., <code>&lt;img src="assets/teaser.png" /&gt;</code>).
+            <b>Figure 1.</b> Left: Overview of the 4D Occupancy Spatio-Temporal Persistence (OccSTeP) pipeline. For the first time, four challenging driving scenarios {Reverse, Discontinuous, Fragmentary, Reductive} are involved for benchmarking two tasks: (1) reactive forecasting "what will happen next"; (2) proactive forecasting "what would happen given a specific future action (e.g., turn left)". Right: The comparison results show that our OccSTeP-WM obtains more robust performance.
           </p>
         </div>
+      </section>
 
-        <h2 style="margin-top:18px">Key Contributions</h2>
+      <section>
+        <h2>Key Contributions</h2>
         <ul>
-          <li><b>OccSTeP Benchmark</b>: evaluates temporal persistence under missing frames, view fragmentation, backward playback, and semantic noise.</li>
-          <li><b>OccSTeP-WM</b>: a <b>tokenizer-free</b> world model with dense voxel state representation and linear-complexity sequence modeling.</li>
-          <li><b>Online / Incremental 4D Modeling</b>: supports reactive prediction and action-conditioned forecasting via recurrent state-space fusion.</li>
+          <li><b>4D Occupancy Spatio-Temporal Persistence (OccSTeP) Benchmark</b>: A new task and benchmark with challenging adverse scenarios including reverse driving, discontinuous sequences, fragmentary observations, and semantic noise.</li>
+          <li><b>OccSTeP-WM</b>: An efficient <b>tokenizer-free</b> world model with spatio-temporal priors fusion module that addresses both reactive and proactive forecasting via recurrent state-space fusion.</li>
+          <li><b>State-of-the-Art Performance</b>: Achieving semantic mIoU of 23.70% (+6.56% gain) and occupancy IoU of 35.89% (+9.26% gain), demonstrating the effectiveness of persistent occupancy forecasting.</li>
         </ul>
       </section>
 
       <section>
-        <h2>Results</h2>
+        <h2>Main Results</h2>
         <div class="grid2">
           <div class="card kpi">
-            <b>+6.56%</b>
-            <span>Semantic mIoU improvement (Occ3D)</span>
+            <b>23.70%</b>
+            <span>Semantic mIoU <span style="color:var(--accent2)">+6.56%</span></span>
           </div>
           <div class="card kpi">
-            <b>+9.26%</b>
-            <span>Occupancy IoU improvement (Occ3D)</span>
+            <b>35.89%</b>
+            <span>Occupancy IoU <span style="color:var(--accent2)">+9.26%</span></span>
           </div>
         </div>
         <p class="muted small" style="margin-top:10px">
@@ -201,42 +85,70 @@
 
         <h2 style="margin-top:16px">Downloads</h2>
         <ul class="small">
-          <li><b>Code</b>: <span class="mono">github.com/&lt;org&gt;/occstep</span></li>
+          <li><b>Code</b>: <span class="mono">coming soon</span></li>
           <li><b>Dataset</b>: <span class="mono">coming soon</span></li>
           <li><b>Pretrained Models</b>: <span class="mono">coming soon</span></li>
         </ul>
       </section>
 
-      <section>
+      <section class="full-width">
         <h2>Abstract</h2>
-        <p class="small">
-          (Paste your paper abstract here.)
-        </p>
-        <p class="small muted">
-          Tip: keep this section short. Most visitors will look for the teaser, contributions, and links first.
+        <p class="abstract-text">
+          Autonomous driving requires a persistent understanding of 3D scenes that is robust to temporal disturbances and accounts for potential future actions. We introduce 4D Occupancy Spatio-Temporal Persistence (OccSTeP), addressing two tasks: (1) reactive forecasting ("what will happen next") and (2) proactive forecasting ("what would happen given a specific future action"). We create a new OccSTeP benchmark with challenging scenarios including erroneous semantic labels and dropped frames. OccSTeP-WM is a tokenizer-free world model maintaining dense voxel-based scene state with linear-complexity attention and recurrent state-space modules for long-range spatial dependencies and continual scene memory updates. The design enables online inference and robustness to missing or noisy sensor input, achieving semantic mIoU of 23.70% (+6.56% gain) and occupancy IoU of 35.89% (+9.26% gain). Data and code are open-sourced.
         </p>
       </section>
 
-      <section>
+      <section class="full-width">
+        <h2>Method</h2>
+        <div class="figure">
+          <img src="assets/occstep_framework.png" alt="OccSTeP-WM Framework" />
+          <p class="small muted" style="margin:10px 2px 0">
+            <b>Figure 2.</b> Architecture of OccSTeP-WM, our tokenizer-free world model with spatio-temporal priors fusion module for 4D occupancy prediction.
+          </p>
+        </div>
+      </section>
+
+      <section class="full-width">
         <h2>Citation</h2>
         <p class="muted small">If you find our work useful, please cite:</p>
         <div class="card">
 <pre class="mono" style="margin:0; white-space:pre-wrap;">
-@article{occstep2025,
-  title   = {OccSTeP: Benchmarking 4D Occupancy Spatio-Temporal Persistence},
-  author  = {Zheng, Yu and Hu, Jie and Yang, Kailun and Zhang, Jiaming},
-  journal = {arXiv preprint arXiv:XXXX.XXXXX},
-  year    = {2025}
+@article{zheng2025occstep,
+  title={OccSTeP: Benchmarking 4D Occupancy Spatio-Temporal Persistence},
+  author={Zheng, Yu and Hu, Jie and Yang, Kailun and Zhang, Jiaming},
+  journal={arXiv preprint arXiv:2512.15621},
+  year={2025}
 }
 </pre>
         </div>
       </section>
 
       <section>
+        <h2>Authors</h2>
+        <div class="authors-grid">
+          <a href="https://github.com/FaterYU" target="_blank" rel="noopener" class="author-avatar" title="Yu Zheng">
+            <img src="https://github.com/FaterYU.png" alt="Yu Zheng" />
+            <span>Yu Zheng</span>
+          </a>
+          <a href="https://github.com/JieHu1996" target="_blank" rel="noopener" class="author-avatar" title="Jie Hu">
+            <img src="https://github.com/JieHu1996.png" alt="Jie Hu" />
+            <span>Jie Hu</span>
+          </a>
+          <a href="https://github.com/elnino9ykl" target="_blank" rel="noopener" class="author-avatar" title="Kailun Yang">
+            <img src="https://github.com/elnino9ykl.png" alt="Kailun Yang" />
+            <span>Kailun Yang</span>
+          </a>
+          <a href="https://github.com/jamycheung" target="_blank" rel="noopener" class="author-avatar" title="Jiaming Zhang">
+            <img src="https://github.com/jamycheung.png" alt="Jiaming Zhang" />
+            <span>Jiaming Zhang</span>
+          </a>
+        </div>
+      </section>
+
+      <section>
         <h2>Contact</h2>
         <p class="small">
-          For questions, please email <a href="mailto:yzheng@hnu.edu.cn">yzheng@hnu.edu.cn</a>.
-          (Update to your preferred contact.)
+          For questions, please email <a href="mailto:yzheng@hnu.edu.cn">yzheng@hnu.edu.cn</a> or open an issue on <a href="https://github.com/InSAI-Lab/OccSTeP/issues" target="_blank" rel="noopener">GitHub</a>.
         </p>
         <p class="muted small">
           Maintained by the OccSTeP authors. Last updated: <span id="updated"></span>.
